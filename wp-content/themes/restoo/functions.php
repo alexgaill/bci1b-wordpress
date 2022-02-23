@@ -22,6 +22,13 @@ function restoo_setup()
 
     // Active le d'image mise en avant
     add_theme_support('post-thumbnails');
+
+    // Génère une nouvelle taille d'image
+    add_image_size('banner-size', 1000, 0, ["center", "center"]);
+
+    // Supprime un format d'image
+    remove_image_size('medium');
+    add_image_size('medium', 500, 500);
 }
 
 /**
@@ -62,4 +69,5 @@ add_action('wp_enqueue_scripts', 'restoo_register_assets');
 // Modifie le format du titre de la page
 add_filter('wp_title', 'restoo_title');
 
+// Modifie le séparateur du title
 add_filter('document_title_separator', 'restoo_title_separator');
