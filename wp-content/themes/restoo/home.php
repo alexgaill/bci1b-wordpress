@@ -26,6 +26,9 @@ get_header();
         <?php endwhile; ?>
         </tbody>
     </table>
+    <div class="my-3">
+        <?php restoo_pagination(); ?>
+    </div>
 <?php else: ?>
     <h2 class="text-danger">Il n'y a pas d'articles pour le moment</h2>
 <?php endif; ?>

@@ -18,7 +18,9 @@ function restoo_setup()
     // Active le support de menu
     add_theme_support('menus');
 
+    // Créé un menu
     register_nav_menu('header', "Menu d'en-tête");
+    register_nav_menu('footer', "menu de pied-de-page");
 
     // Active le d'image mise en avant
     add_theme_support('post-thumbnails');
@@ -67,6 +69,20 @@ function restoo_menu_link_class (array $attrs):array
 {
     $attrs['class'] = 'nav-link active';
     return $attrs;
+}
+
+function restoo_pagination ()
+{
+    $pages = paginate_links(['type' => 'array']);
+
+    if ($pages !== null) {
+        $classe = "page-item";
+        echo "<nav aria-label='pagination' class='my-4'><ul class='pagination'>";
+        foreach ($pages as $page) {
+            echo "<li class='$classe'>". str_replace("page-numbers", "page-link", $page) ."</li>";
+        }
+        echo '</ul></nav>';
+    }
 }
 
 /**
