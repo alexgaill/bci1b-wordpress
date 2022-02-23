@@ -8,17 +8,17 @@
  */
 function restoo_setup()
 {
-    /**
-     * Gère l'affichage du title sur les pages
-     */
+    // Gère l'affichage du title sur les pages
     add_theme_support('title-tag');
 
-    /**
-     * Gère le background des pages
-     */
+    // Gère le background des pages
     add_theme_support('custom-background', [
         'default-color' => "#111111"
     ]);
+    // Active le support de menu
+    add_theme_support('menus');
+
+    register_nav_menu('header', "Menu d'en-tête");
 
     // Active le d'image mise en avant
     add_theme_support('post-thumbnails');
@@ -28,7 +28,7 @@ function restoo_setup()
 
     // Supprime un format d'image
     remove_image_size('medium');
-    add_image_size('medium', 500, 500);
+    add_image_size('medium', 350, 350);
 }
 
 /**
@@ -57,6 +57,18 @@ function restoo_title_separator():string
     return "|";
 }
 
+function restoo_menu_class (array $classes): array
+{
+    $classes[] = "nav-item";
+    return $classes;
+}
+
+function restoo_menu_link_class (array $attrs):array
+{
+    $attrs['class'] = 'nav-link active';
+    return $attrs;
+}
+
 /**
  * Ajoute l'action restoo_setup au moment du chargement d'une page
  * This hook is called during each page load, after the theme is initialized. It is generally used to perform basic setup, registration, and init actions for a theme.
@@ -71,3 +83,8 @@ add_filter('wp_title', 'restoo_title');
 
 // Modifie le séparateur du title
 add_filter('document_title_separator', 'restoo_title_separator');
+
+// Modifie les class des items d'un menu
+add_filter('nav_menu_css_class', 'restoo_menu_class');
+
+add_filter('nav_menu_link_attributes', 'restoo_menu_link_class');
